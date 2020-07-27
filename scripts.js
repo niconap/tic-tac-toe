@@ -1,9 +1,10 @@
 let topRow = document.getElementById("top");
 let middleRow = document.getElementById("middle");
 let bottomRow = document.getElementById("bottom");
+let currentPlayer = 0;
 
 const Gameboard = () => {
-    let board = [" ", "x", " ", "x", "o", "x", "o", " ", "o"];
+    let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
     
     let render = () => {
         topRow.innerHTML = "";
@@ -37,18 +38,26 @@ const Gameboard = () => {
             cell.innerHTML = board[i];
         }
         let cells = document.querySelector("td");
-    }
 
-    let changeState = (id) => {
-        if ()
-        board[id] = "x";
-        render();
-    };
+        let changeState = (id) => {
+            if (board[id] == " " && currentPlayer == 0) {
+                board[id] = "x";
+                currentPlayer = 1;
+                render();
+            } else if (board[id] == " " && currentPlayer == 1) {
+                board[id] = "o";
+                currentPlayer = 0;
+                render();
+            } else {
+                return;
+            }
+        };
+    }
 
     return {render};
 };
 
-const Player = (name, shape) => {
+const Player = (name, shape, id) => {
     const getName = name;
     const getShape = shape;
 
