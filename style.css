@@ -1,21 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
+    font-family: Montserrat, sans-serif;
+    outline: none;
+}
+
+input {
+    width: 150px;
+    height: 50px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+p {
+    margin: 20px;
+    font-size: 15px;
+}
+
+button {
+    margin: 10px;
+    font-size: 20px;
+    height: 50px;
+    width: 100px;
+    border: none;
+    border-radius: 50px;
+    background-color: #b0defa;
+    color: white;
+    box-shadow: 0px 0px 40px 0px rgba(171,171,171,0.5);
+}
+
+button:hover {
+    cursor: pointer;
+    background: #95d3f8;
+}
+
+button:active {
+    box-shadow: none;
+    cursor: pointer;
+    background: #88cef7;
 }
 
 table {
-    border: solid 1px black;
-    display: inline-block;
+    display: var(--display);
+    border-radius: 30px;
+    box-shadow: 0px 0px 40px 0px rgba(171,171,171,0.5);
+    margin: 50px;
+    padding: 10px;
+    text-align: center;
 }
 
 td {
-    border: solid 1px black;
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+    background: #F5F5F5;
+    color: darkslategray;
+    font-size: 30px;
     padding: 10px;
-    width: 50px;
-    height: 50px;
     text-align: center;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+td:hover {
+    background-color: #ECECEC;
+}
+
+td:active {
+    background: darkgray;
+}
+
+h1 {
+    color: darkslategray;
+    margin: 10px;
+    margin-top: 100px;
 }
 
 #wrapper {
     text-align: center;
+}
+
+#display1 {
+    padding: 10px;
+    display: inline-block;
+    border-radius: 50px;
+    box-shadow: 0px 0px 40px 0px rgba(171,171,171,0.5);
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+}
+
+#display2 {
+    padding: 10px;
+    display: inline-block;
+    border-radius: 50px;
+    box-shadow: 0px 0px 40px 0px rgba(171,171,171,0.5);
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+}
+
+:root {
+    --display: none;
 }

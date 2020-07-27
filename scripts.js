@@ -37,6 +37,8 @@ const Gameboard = () => {
     
     // Render the gameboard based on an array
     let render = () => {
+        let root = document.documentElement;
+        root.style.setProperty('--display', "inline-block");
         topRow.innerHTML = "";
         middleRow.innerHTML = "";
         bottomRow.innerHTML = "";
@@ -70,6 +72,7 @@ const Gameboard = () => {
 
         // Check if there's three of the same symbols in a row
         let checkWin = () => {
+            changeColor();
             if (board[0] == "x" && board[1] == "x" && board[2] == "x" || board[3] == "x" && board[4] == "x" && board[5] == "x" || board[6] == "x" && board[7] == "x" && board[8] == "x" || 
             board[0] == "x" && board[3] == "x" && board[6] == "x" || board[1] == "x" && board[4] == "x" && board[7] == "x" || board[2] == "x" && board[5] == "x" && board[8] == "x" ||
             board[0] == "x" && board[4] == "x" && board[8] == "x" || board[2] == "x" && board[4] == "x" && board[6] == "x") {
@@ -103,6 +106,11 @@ const Gameboard = () => {
             }
         }
         checkWin();
+    }
+
+    let changeColor = () => {
+        let interface = Interface();
+        interface.nameColor();
     }
 
     let resetBoard = () => {
@@ -146,11 +154,13 @@ const Player = (name, shape) => {
 // Manipulate the DOM (excluding the game board)
 const Interface = () => {
     let displayPlayer = (player1, player2) => {
-        let display = document.createElement("paragraph");
-        display.innerHTML = `${player1.getName} ${player1.getShape}`;
+        let display = document.createElement("p");
+        display.innerHTML = `${player1.getName}: ${player1.getShape}`;
+        display.setAttribute("id", "display1");
         wrapper.appendChild(display);
-        let display2 = document.createElement("paragraph");
-        display2.innerHTML = `${player2.getName} ${player2.getShape}`;
+        let display2 = document.createElement("p");
+        display2.innerHTML = `${player2.getName}: ${player2.getShape}`;
+        display2.setAttribute("id", "display2");
         wrapper.appendChild(display2);
         removeUI();
     }
@@ -175,5 +185,19 @@ const Interface = () => {
         wrapper.appendChild(button);
     }
 
-    return {displayPlayer, resetButton};
+    let nameColor = () => {
+        if (currentPlayer == 0) {
+            let first = document.getElementById("display1");
+            let second = document.getElementById("display2");
+            first.setAttribute("style", "background: lightgreen;");
+            second.setAttribute("style", "background: #FF8484;");
+        } else {
+            let first = document.getElementById("display2");
+            let second = document.getElementById("display1");
+            first.setAttribute("style", "background: lightgreen;");
+            second.setAttribute("style", "background: #FF8484;");
+        }
+    }
+
+    return {displayPlayer, resetButton, nameColor};
 }
