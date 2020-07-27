@@ -1,10 +1,33 @@
-//Global variables
+// Global variables
 let topRow = document.getElementById("top");
 let middleRow = document.getElementById("middle");
 let bottomRow = document.getElementById("bottom");
+
+let startbutton = document.getElementById("start");
+let firstInput = document.getElementById("textinput1");
+let secondInput = document.getElementById("textinput2");
+let wrapper = document.getElementById("wrapper");
+let input = document.getElementById("input");
+
 let currentPlayer = 0;
-let hasWon = false;
 let moves = 0;
+let hasWon = false;
+
+// Global functions
+
+// Start the game when the start button is pressed
+// Make two players and assign their shapes (use the Player "class")
+// Display the two players and their shapes on the page
+startbutton.addEventListener("click", function () {
+    if (!firstInput.value == "" && !secondInput.value == "") {
+        let playerOne = Player(firstInput.value, "cross");
+        let playerTwo = Player(secondInput.value, "circle");
+        let interface = Interface();
+        interface.displayPlayer(playerOne, playerTwo);
+        let game = Gameboard();
+        game.render();
+    }
+});
 
 // Render the gameboard
 // Check if a player has won
@@ -53,32 +76,41 @@ const Gameboard = () => {
                 let paragraph = document.createElement("p");
                 paragraph.setAttribute("id", "par");
                 paragraph.innerHTML = "Player 1 has won!"
-                let wrapper = document.getElementById("wrapper");
                 wrapper.appendChild(paragraph);
                 hasWon = true;
+                let reset = Interface();
+                reset.resetButton();
             } else if (board[0] == "o" && board[1] == "o" && board[2] == "o" || board[3] == "o" && board[4] == "o" && board[5] == "o" || board[6] == "o" && board[7] == "o" && board[8] == "o" ||
             board[0] == "o" && board[3] == "o" && board[6] == "o" || board[1] == "o" && board[4] == "o" && board[7] == "o" || board[2] == "o" && board[5] == "o" && board[8] == "o" || 
             board[0] == "o" && board[4] == "o" && board[8] == "o" || board[2] == "o" && board[4] == "o" && board[6] == "o") {
                 let paragraph = document.createElement("p");
                 paragraph.setAttribute("id", "par");
                 paragraph.innerHTML = "Player 2 has won!"
-                let wrapper = document.getElementById("wrapper");
                 wrapper.appendChild(paragraph);
                 hasWon = true;
+                let reset = Interface();
+                reset.resetButton();
             } else if (moves == 9) {
                 let paragraph = document.createElement("p");
                 paragraph.setAttribute("id", "par");
                 paragraph.innerHTML = "It's a tie!"
-                let wrapper = document.getElementById("wrapper");
                 wrapper.appendChild(paragraph);
                 hasWon = true;
+                let reset = Interface();
+                reset.resetButton();
             } else {
                 return;
             }
         }
-
         checkWin();
-    };
+    }
+
+    let resetBoard = () => {
+        board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        currentPlayer = 0;
+        hasWon = false;
+        render();
+    }
     
     // Change the content of the cells in the gameboard 
     // Make sure that the symbol matches the current player
@@ -100,16 +132,48 @@ const Gameboard = () => {
         }
     }
 
-    return {render};
+    return {render, resetBoard};
 };
 
-// Make a player and assign a name and a shape (x or o)
-const Player = (name, shape, id) => {
+// Make a player and assign a name 
+const Player = (name, shape) => {
     const getName = name;
     const getShape = shape;
 
     return {getName, getShape};
 };
 
-let i = Gameboard();
-i.render();
+// Manipulate the DOM (excluding the game board)
+const Interface = () => {
+    let displayPlayer = (player1, player2) => {
+        let display = document.createElement("paragraph");
+        display.innerHTML = `${player1.getName} ${player1.getShape}`;
+        wrapper.appendChild(display);
+        let display2 = document.createElement("paragraph");
+        display2.innerHTML = `${player2.getName} ${player2.getShape}`;
+        wrapper.appendChild(display2);
+        removeUI();
+    }
+
+    let removeUI = () => {
+        input.removeChild(firstInput);
+        input.removeChild(secondInput);
+        input.removeChild(startbutton);
+    }
+
+    let resetButton = () => {
+        let button = document.createElement("button");
+        button.innerHTML = "Restart";
+        button.addEventListener("click", function () {
+            moves = 0;
+            let reset = Gameboard();
+            reset.resetBoard();
+            wrapper.removeChild(button);
+            let paragraph = document.getElementById("par");
+            wrapper.removeChild(paragraph);
+        });
+        wrapper.appendChild(button);
+    }
+
+    return {displayPlayer, resetButton};
+}
