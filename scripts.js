@@ -37,6 +37,7 @@ startbutton.addEventListener("click", function () {
         alert.setAttribute("id", "alert");
         alert.innerHTML = "Please enter two player names!"
         wrapper.appendChild(alert);
+        alerted = true;
     } else {
         return;
     }
