@@ -8,6 +8,7 @@ let firstInput = document.getElementById("textinput1");
 let secondInput = document.getElementById("textinput2");
 let wrapper = document.getElementById("wrapper");
 let input = document.getElementById("input");
+let alerted = false;
 
 let currentPlayer = 0;
 let moves = 0;
@@ -23,9 +24,21 @@ startbutton.addEventListener("click", function () {
         let playerOne = Player(firstInput.value, "cross");
         let playerTwo = Player(secondInput.value, "circle");
         let interface = Interface();
+        if (alerted = true) {
+            let alert = document.getElementById("alert");
+            wrapper.removeChild(alert);        
+        }
         interface.displayPlayer(playerOne, playerTwo);
         let game = Gameboard();
         game.render();
+    } else if (alerted == false) {
+        let alert = document.createElement("p");
+        alert.setAttribute("style", "color: #FF8484")
+        alert.setAttribute("id", "alert");
+        alert.innerHTML = "Please enter two player names!"
+        wrapper.appendChild(alert);
+    } else {
+        return;
     }
 });
 
