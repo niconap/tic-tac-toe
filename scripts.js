@@ -24,7 +24,7 @@ startbutton.addEventListener("click", function () {
         let playerOne = Player(firstInput.value, "cross");
         let playerTwo = Player(secondInput.value, "circle");
         let interface = Interface();
-        if (alerted = true) {
+        if (alerted == true) {
             let alert = document.getElementById("alert");
             wrapper.removeChild(alert);        
         }
