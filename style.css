@@ -30,6 +30,7 @@ button {
     border: none;
     border-radius: 50px;
     background-color: #b0defa;
+    transition: background-color 0.3s ease;
     color: white;
     cursor: pointer;
     box-shadow: 0px 0px 40px 0px rgba(171,171,171,0.5);
@@ -64,6 +65,7 @@ td {
     text-align: center;
     font-weight: 800;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 td:hover {
@@ -77,7 +79,7 @@ td:active {
 h1 {
     color: darkslategray;
     margin: 10px;
-    margin-top: 5%;
+    margin-top: 5px;
 }
 
 #wrapper {
@@ -92,6 +94,7 @@ h1 {
     color: white;
     margin: 10px;
     font-size: 20px;
+    transition: background-color 0.5s ease;
 }
 
 #display2 {
@@ -102,6 +105,7 @@ h1 {
     color: white;
     margin: 10px;
     font-size: 20px;
+    transition: background-color 0.5s ease;
 }
 
 #githubicon {
